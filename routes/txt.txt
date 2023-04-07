@@ -1,0 +1,28 @@
+
+       const csvFilePath='./routes/' + req.file.filename;
+        function importFile(csvFilePath){
+            console.log(csvFilePath);
+          //  Read Excel File to Json Data
+            var arrayToInsert = [];
+            csv().fromFile(csvFilePath).then(jsonObj=> {
+                console.log(jsonObj);
+          // Fetching the all data from each row
+            for (var i = 0; i < jsonObj.length; i++) {
+                console.log(jsonObj[i]["name"])
+                var singleRow = {
+                    name: jsonObj[i]["name"],
+                    email: jsonObj[i]["email"],
+                };
+                arrayToInsert.push(singleRow);
+            }
+            console.log( arrayToInsert)
+         //inserting into the table student
+       const usermail =  UserMail.insertMany({arrayToInsert})
+                if (!usermail){ console.log(err);}
+                    else{
+                        console.log("File imported successfully.");
+                        res.status(200).json({message:"File Uploaded successfully"})
+                    }
+            
+            });
+       }
