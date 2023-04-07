@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { DatabaseConnection } from "./DatabaseConnection.js";
+import { DatabaseConnection } from "./databaseConnection.js";
 import { signupRouter } from "./routes/Register.js";
 import { loginRouter} from"./routes/Login.js";
 import { isSignedIn } from "./routes/Autherization.js";
