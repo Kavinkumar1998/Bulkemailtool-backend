@@ -51,6 +51,25 @@ router.put("/edituser/:id",async(req,res)=>{
     }
 })
 
+//router for geting users
+router.get("/users",async(req,res)=>{
+    try{
+        const users = await UserMail.find();
+        if(!users){
+            res.status(400).json({message:"No Users"})
+          }
+          else
+          { 
+            res.status(200).json({message:"Success",users});
+        }      
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message:"Internal Server error"})
+    }
+})
+
+
 //router for uploading csv file
 
 // upload excel file and import in mongodb
