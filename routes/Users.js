@@ -60,7 +60,7 @@ router.get("/users",async(req,res)=>{
           }
           else
           { 
-            res.status(200).json({message:"Success",users});
+            res.status(200).json(users);
         }      
     }
     catch(error){
@@ -69,6 +69,22 @@ router.get("/users",async(req,res)=>{
     }
 })
 
+
+//route for deleting users
+router.delete("/delete/:id",async (req,res)=>{
+    try{
+const {id} = req.params;
+const deleted = await UserMail.findByIdAndDelete({_id:id});
+if(!deleted){
+    return res.status(400).json({message:"Error Deleting your content"}) 
+}
+res.status(200).json({message:"Deleted Succesfully"}) 
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message:"Internal Server Error"})
+    }
+})
 
 //router for uploading csv file
 
