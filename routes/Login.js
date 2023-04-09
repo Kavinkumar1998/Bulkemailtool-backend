@@ -19,9 +19,12 @@ if(!user){
 const ValidatePassword = await bcrypt.compare(Password,user.Password);
 if(!ValidatePassword) {
     res.status(400).json({message:"Invalid password"});
-}
+}else{
 const token = generateAuthToken(user._id);
-res.status(200).json({message:"Loged In Sucessfully",user,token})
+const Name = user.Name;
+const Email = user.Email;
+res.status(200).json({message:"Loged In Sucessfully",Name,Email,token})
+}
 }
 catch(error){
     console.log(error)
@@ -35,7 +38,7 @@ router.post("/forgetpassword",async (req,res)=>{
     try{
         const {Email}=req.body;
         const user = await User.findOne({Email:Email});
-        if(!user){
+        if(!user){ 
             res.status(400).json({message:"Invalid Email"})
         }
         else{
