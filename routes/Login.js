@@ -21,7 +21,7 @@ if(!ValidatePassword) {
     res.status(400).json({message:"Invalid password"});
 }
 const token = generateAuthToken(user._id);
-res.status(200).json({message:"Loged In Sucessfully",token})
+res.status(200).json({message:"Loged In Sucessfully",user,token})
 }
 catch(error){
     console.log(error)
